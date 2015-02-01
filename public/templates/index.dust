@@ -1,5 +1,32 @@
 {>"layouts/master" /}
 
 {<body}
-    <h1>{@pre type="content" key="greeting"/}</h1>
+    <div class="row bar-row">
+        <div class="col-md-3 bar-column">
+            <div class="bar-head text-center">Onboard</div>
+            <form class="form center-form" action="/transform" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="hidden" name="_csrf" value="{_csrf}">
+
+                    <label for="select-region">Select the region to onboard</label>
+                    <select id="select-region" name="region" class="form-control" placeholder="Region">
+                            <option role="presentation" value="kr">Malaysia</option>
+                            <option role="presentation" value="kr">Korea</option>
+                            <option role="presentation" value="kr">Thailand</option>
+                        {#regions}
+                            <option role="presentation" value="">{.name}</option>
+                        {/regions}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="upload-excel">Upload excel file</label>
+                    <input id="upload-excel" name="file" type="file" class="filestyle" data-icon="false">
+                </div>
+                <div class="form-actions text-center">
+                    <input type="submit" class="btn btn-lg btn-success"></input>
+                </div>
+            </form>
+        </div>
+    </div>
+
 {/body}

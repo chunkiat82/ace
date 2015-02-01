@@ -1,0 +1,128 @@
+[
+    {
+        "column": 0,
+        "jsonPath": "businessInfo.name",
+        "description": "Hotel Name",
+        "group": "Basic Info",
+        "required": true
+    },
+    {
+        "column": 1,
+        "jsonPath": "",
+        "description": "Status",
+        "group": "Basic Info",
+        "required": true
+    },
+    {
+        "column": 2,
+        "jsonPath": "",
+        "description": "accountType",
+        "group": "PayPal Info",
+        "required": true
+    },
+    {
+        "column": 3,
+        "jsonPath": "owner.email",
+        "description": "PayPal Email ID",
+        "group": "PayPal Info",
+        "required": true
+    },
+    {
+        "column": 4,
+        "jsonPath": "partner.email",
+        "description": "Partner Email",
+        "group": "Owner Info",
+        "required": true
+    },
+    {
+        "column": 5,
+        "jsonPath": "owner.salutation",
+        "description": "Salutation",
+        "group": "Owner Info",
+        "required": false
+    },
+    {
+        "column": 6,
+        "jsonPath": "owner.name.firstName",
+        "description": "First Name",
+        "group": "Owner Info",
+        "required": false
+    },
+    {
+        "column": 7,
+        "jsonPath": "owner.name.lastName",
+        "description": "Last Name",
+        "group": "Owner Info",
+        "required": false
+    },
+    {
+        "column": 8,
+        "jsonPath": "owner.dataOfBirth",
+        "description": "Date of Birth",
+        "group": "Owner Info",
+        "required": false
+    },
+    {
+        "column": 9,
+        "jsonPath": "businessInfo.street",
+        "description": "Street",
+        "group": "Owner Info",
+        "required": true
+    },
+    {
+        "column": 10,
+        "jsonPath": "businessInfo.city",
+        "description": "City Name",
+        "group": "Business Info",
+        "required": true
+    },
+    {
+        "column": 11,
+        "jsonPath": "businessInfo.state",
+        "description": "State or Province",
+        "group": "Business Info",
+        "required": true
+    },
+    {
+        "column": 12,
+        "jsonPath": "businessInfo.country",
+        "description": "Country",
+        "group": "Business Info",
+        "required": true
+    },
+    {
+        "column": 13,
+        "jsonPath": "businessInfo.postalCode",
+        "description": "Postal Code",
+        "group": "Business Info",
+        "required": true
+    },
+    {
+        "column": 14,
+        "jsonPath": "businessInfo.workPhone",
+        "description": "Work Phone",
+        "group": "Business Info",
+        "required": true
+    },
+    {
+        "column": 15,
+        "jsonPath": "businessInfo.website",
+        "description": "Website",
+        "group": "Business Info",
+        "required": true
+    },
+    {
+        "column": 16,
+        "jsonPath": "businessInfo.dateOfRegistration",
+        "description": "Date of Registration",
+        "group": "Business Info",
+        "required": true
+    },
+    {
+        "column": 17,
+        "jsonPath": "businessInfo.customerServiceEmail",
+        "description": "Customer Service Email",
+        "group": "Business Info",
+        "required": true
+    }
+]
