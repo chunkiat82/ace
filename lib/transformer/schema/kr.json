@@ -16,13 +16,13 @@
     {
         "column": 2,
         "jsonPath": "",
-        "description": "accountType",
+        "description": "Type",
         "group": "PayPal Info",
         "required": true
     },
     {
         "column": 3,
-        "jsonPath": "owner.email",
+        "jsonPath": "owner.payer.email",
         "description": "PayPal Email ID",
         "group": "PayPal Info",
         "required": true
@@ -36,28 +36,28 @@
     },
     {
         "column": 5,
-        "jsonPath": "owner.salutation",
+        "jsonPath": "owner.payer.salutation",
         "description": "Salutation",
         "group": "Owner Info",
         "required": false
     },
     {
         "column": 6,
-        "jsonPath": "owner.name.firstName",
+        "jsonPath": "owner.payer.firstName",
         "description": "First Name",
         "group": "Owner Info",
         "required": false
     },
     {
         "column": 7,
-        "jsonPath": "owner.name.lastName",
+        "jsonPath": "owner.payer.lastName",
         "description": "Last Name",
         "group": "Owner Info",
         "required": false
     },
     {
         "column": 8,
-        "jsonPath": "owner.dataOfBirth",
+        "jsonPath": "owner.payer.dataOfBirth",
         "description": "Date of Birth",
         "group": "Owner Info",
         "required": false
