@@ -1,0 +1,62 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:aa="http://svcs.paypal.com/types/aa">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <aa:CreateAccountRequest>
+            <requestEnvelope>
+                <detailLevel>ReturnAll</detailLevel>
+                <errorLanguage>en_US</errorLanguage>
+            </requestEnvelope>
+
+            <accountType>{accountType}</accountType>
+            <name>
+                <firstName>{owner.name.firstName}</firstName>
+                <lastName>{owner.name.lastName}</lastName>
+            </name>
+            <dateOfBirth>{owner.dateOfBirth}</dateOfBirth>
+            <address>
+                <line1>{owner.address.line1}</line1>
+                <city>{owner.address.city}</city>
+                <state>{owner.address.state}</state>
+                <postalCode>{owner.address.postalCode}</postalCode>
+                <countryCode>{owner.address.countryCode}</countryCode>
+            </address>
+
+            <contactPhoneNumber>{contactPhoneNumber}</contactPhoneNumber>
+            <homePhoneNumber>{homePhoneNumber}</homePhoneNumber>
+            <mobilePhoneNumber>{mobilePhoneNumber}</mobilePhoneNumber>
+            <currencyCode>{currencyCode}</currencyCode>
+            <citizenshipCountryCode>{citizenshipCountryCode}</citizenshipCountryCode>
+            <preferredLanguageCode>{language}</preferredLanguageCode>
+            <emailAddress>{owner.email}</emailAddress>
+            <registrationType>WEB</registrationType>
+            <createAccountWebOptions>
+                <showAddCreditCard>true</showAddCreditCard>
+                <returnUrlDescription>my return url</returnUrlDescription>
+                <useMiniBrowser>true</useMiniBrowser>
+            </createAccountWebOptions>
+            <businessInfo>
+                <businessName>{businessInfo.name}</businessName>
+                <businessAddress>
+                    <line1>{businessInfo.address.line1}</line1>
+                    <city>{businessInfo.address.city}</city>
+                    <state>{businessInfo.address.state}</state>
+                    <postalCode>{businessInfo.address.postalCode}</postalCode>
+                    <countryCode>{businessInfo.address.countryCode}</countryCode>
+                </businessAddress>
+                <workPhone>{businessInfo.workPhone}</workPhone>
+                <category>{businessInfo.category}</category>
+                <subCategory>{businessInfo.subCategory}</subCategory>
+                <businessType>{businessInfo.businessType}</businessType>
+                <dateOfEstablishment>{businessInfo.dateOfEstablishment}</dateOfEstablishment>
+                <customerServicePhone>{businessInfo.customerServicePhone}</customerServicePhone>
+                <customerServiceEmail>{businessInfo.customerServiceEmail}</customerServiceEmail>
+                <averagePrice>{businessInfo.averagePrice}</averagePrice>
+                <averageMonthlyVolume>{businessInfo.averageMonthlyVolume}</averageMonthlyVolume>
+                <webSite>{businessInfo.website}/</webSite>
+                <percentageRevenueFromOnline>{businessInfo.percentageRevenueFromOnline}</percentageRevenueFromOnline>
+                <salesVenue>WEB</salesVenue>
+            </businessInfo>
+
+        </aa:CreateAccountRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
