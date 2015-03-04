@@ -1,0 +1,7 @@
+{>"layouts/master" /}
+
+{<body}
+<div class="container text-center bar-column">
+    <div class="bar-head text-center">The MAM xml request file is <a href="{link}" target="_blank">here</a></div>
+</div>
+{/body}
