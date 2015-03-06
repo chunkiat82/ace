@@ -13,6 +13,13 @@ Help PayPal partners create massive accounts for their merchants in a simpler an
 
 ## Sample `AA` request
 
+## To run App
+```
+npm install
+bower install
+npm start
+```
+
 ```
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:aa="http://svcs.paypal.com/types/aa">
    <soapenv:Header/>

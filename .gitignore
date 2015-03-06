@@ -27,3 +27,15 @@ node_modules
 
 .build
 .idea
+
+#mongodb
+journal
+local.0
+local.ns
+mongod.lock
+
+#bower components
+public/components
+
+#downloads
+public/downloads
