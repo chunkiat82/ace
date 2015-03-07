@@ -37,5 +37,6 @@ mongod.lock
 #bower components
 public/components
 
-#downloads
+#public folders to be ignored
 public/downloads
+public/uploads

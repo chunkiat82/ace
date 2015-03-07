@@ -3,30 +3,33 @@
 {<body}
     <div class="row bar-row">
         <div class="col-md-3 bar-column">
-            <div class="bar-head text-center">Onboard</div>
-            <form class="form center-form" action="/transform" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <input type="hidden" name="_csrf" value="{_csrf}">
+            <div class="bar-head text-center">Onboard</div>            
+            <div class="form-group">
+                <input type="hidden" id="csrf" name="_csrf" value="{_csrf}">
 
-                    <label for="select-region">Select the region to onboard</label>
-                    <select id="select-region" name="region" class="form-control" placeholder="Region">
-                            <option role="presentation" value="kr">Malaysia</option>
-                            <option role="presentation" value="kr">Korea</option>
-                            <option role="presentation" value="kr">Thailand</option>
-                        {#regions}
-                            <option role="presentation" value="">{.name}</option>
-                        {/regions}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="upload-excel">Upload excel file</label>
-                    <input id="upload-excel" name="file" type="file" class="filestyle" data-icon="false">
-                </div>
-                <div class="form-actions text-center">
-                    <input type="submit" class="btn btn-lg btn-success"></input>
-                </div>
-            </form>
+                <label for="select-region">Select the region to onboard</label>
+                <select id="select-region" name="region" class="form-control" placeholder="Region">
+                        <option role="presentation" value="kr">Malaysia</option>
+                        <option role="presentation" value="kr">Korea</option>
+                        <option role="presentation" value="kr">Thailand</option>
+                    {#regions}
+                        <option role="presentation" value="">{.name}</option>
+                    {/regions}
+                </select>
+            </div>
+            <span class="btn btn-success fileinput-button">                
+                <span>Select file...</span>
+                <!-- The file input field used as target for the file upload widget -->
+                <input id="upload-excel" type="file" name="files[]" data-url="/upload" >
+            </span>            
+            <br>
+            <br>                        
         </div>
-    </div>
-
+        <div>
+            <!-- The global progress bar -->
+            <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>
+        </div>
+    </div>    
 {/body}

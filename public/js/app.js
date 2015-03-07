@@ -30,11 +30,44 @@ require.config({
 });
 
 
-require(["angular","jquery","dustjs-linkedin","dustjs-linkedin-helpers","bootstrap","bootstrap-filestyle"], function () {
+require(["angular","jquery","jquery.ui.widget","jquery.fileupload","jquery.iframe-transport","dustjs-linkedin","dustjs-linkedin-helpers","bootstrap","bootstrap-filestyle"], function () {
 
     var app = {
         initialize: function () {
-            // Your code here
+
+            //[TODO] - this should ideally move to home page
+            $(function () {            
+                // Change this to the location of your server-side upload handler:
+                var url = 'transform';
+                $('#upload-excel').fileupload({      
+                    formData: {region : $('#select-region').val()},
+                    dataType: 'json',
+                    done: function (e, dataReturn) {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/transform", 
+                            data:{
+                                "region":$('#select-region').val(),
+                                "_csrf":$('#csrf').val(),
+                                "filename" : dataReturn.result.files[0].name
+                            }, 
+                            success: function(result){
+                                alert(result.link);
+                            }
+                        });
+
+                    },
+                    progressall: function (e, dataReturn) {
+                        var progress = parseInt(dataReturn.loaded / dataReturn.total * 100, 10);
+                        $('#progress .progress-bar').css(
+                            'width',
+                            progress + '%'
+                        );
+                    }
+                }).prop('disabled', !$.support.fileInput)
+                    .parent().addClass($.support.fileInput ? undefined : 'disabled');                
+            });
         }
     };
 
