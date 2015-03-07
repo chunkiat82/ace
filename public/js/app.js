@@ -22,7 +22,9 @@ require.config({
     "jquery.fileupload-ui": "../components/blueimp-file-upload/js/jquery.fileupload-ui",
     "jquery.fileupload-jquery-ui": "../components/blueimp-file-upload/js/jquery.fileupload-jquery-ui",
     "jquery.fileupload-angular": "../components/blueimp-file-upload/js/jquery.fileupload-angular",
-    "jquery.iframe-transport": "../components/blueimp-file-upload/js/jquery.iframe-transport"
+    "jquery.iframe-transport": "../components/blueimp-file-upload/js/jquery.iframe-transport",
+    noty: "../components/noty/js/noty/packaged/jquery.noty.packaged",   
+    list: "../components/list.js/dist/list"
   },
   packages: [
 
@@ -30,13 +32,16 @@ require.config({
 });
 
 
-require(["angular","jquery","jquery.ui.widget","jquery.fileupload","jquery.iframe-transport","dustjs-linkedin","dustjs-linkedin-helpers","bootstrap","bootstrap-filestyle"], function () {
+require(["angular","jquery","list","noty","jquery.ui.widget","jquery.fileupload","jquery.iframe-transport","dustjs-linkedin","dustjs-linkedin-helpers","bootstrap","bootstrap-filestyle"], function (aa,bb,cc) {
 
     var app = {
         initialize: function () {
 
+            var List = cc;
+
             //[TODO] - this should ideally move to home page
-            $(function () {            
+            $(function () {                    
+                
                 // Change this to the location of your server-side upload handler:
                 var url = 'transform';
                 $('#upload-excel').fileupload({      
@@ -53,12 +58,63 @@ require(["angular","jquery","jquery.ui.widget","jquery.fileupload","jquery.ifram
                                 "filename" : dataReturn.result.files[0].name
                             }, 
                             success: function(result){
-                                alert(result.link);
+                                if (result.errorAccounts.length){                                   
+                                    var n = noty({
+                                        closeWith: ['click'], 
+                                        type: 'error',
+                                        text:'There are invalid records, please review',
+                                        modal: true,
+                                        callback:{
+                                            onCloseClick: function(){
+                                                $('#progress .progress-bar').css(
+                                                    'width',
+                                                    0 + '%'
+                                                );
+
+                                                $('#users').show();
+
+                                                var options = {
+                                                  valueNames: [ 'hotel', 'errors' ],
+                                                  item:'<li class="list-group-item list-group-item-danger"><h3 class="hotel"></h3><p class="errors"></p></li>'
+                                                };
+                                                
+                                                var userList = new List('users', options);
+                                                
+                                                userList.clear();
+                                                
+                                                for (var i=0;i<result.errorAccounts.length;i++){
+                                                    var errAcc  = result.errorAccounts[i];
+                                                    userList.add({
+                                                      hotel: result.errorAccounts[i]["HotelName"],
+                                                      errors: JSON.stringify(result.errorAccounts[i]["Errors"])
+                                                    });                                              
+                                                }
+
+   
+                                            }
+                                        }
+                                    });
+                                }else{
+                                    var n = noty({
+                                        text:'Click to download <a href="'+result.link+'">Zipped XML<a/>',
+                                        modal: true,
+                                        callback:{
+                                            onCloseClick: function(){
+                                                $('#progress .progress-bar').css(
+                                                    'width',
+                                                    0 + '%'
+                                                );
+                                            }
+                                        }
+                                    });
+                                }
+
                             }
                         });
 
                     },
                     progressall: function (e, dataReturn) {
+                        $('#users').hide();
                         var progress = parseInt(dataReturn.loaded / dataReturn.total * 100, 10);
                         $('#progress .progress-bar').css(
                             'width',

@@ -32,7 +32,8 @@
         "jsonPath": "partner.email",
         "description": "Partner Email",
         "group": "Owner Info",
-        "required": true
+        "required": true,
+        "regex" : "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
     },
     {
         "column": 5,
@@ -115,8 +116,7 @@
         "column": 16,
         "jsonPath": "businessInfo.dateOfRegistration",
         "description": "Date of Registration",
-        "group": "Business Info",
-        "required": true
+        "group": "Business Info"
     },
     {
         "column": 17,

@@ -11,14 +11,19 @@ var log = bunyan.createLogger({
     name: "ace::transform"
 });
 var zlib = require("zlib");
-var gzip = zlib.createGzip();
-var uploadDir = __dirname + '/../../public/uploads'
+var uploadDir = __dirname + "/../../public/uploads";
 var uploadUrl = "/upload";
 
 var zipFile = function(sourceFilename, destFilename) {
     var inp = fs.createReadStream(sourceFilename);
     var out = fs.createWriteStream(destFilename);
-    inp.pipe(gzip).pipe(out);
+
+    /*
+     * [FIXED] reusing gzip causes resource locking
+     * so always declare a new pipe resource - zlib.createGzip()
+     */
+
+    inp.pipe(zlib.createGzip()).pipe(out);    
 };
 
 module.exports = function(router) {
@@ -32,22 +37,22 @@ module.exports = function(router) {
             log.info("Received transformation request for filename " + filePath);
 
             // get excel file content from request
-            transformer.transform(filePath, region, function(content) {
+            transformer.transform(filePath, region, function(errorAccounts,content) {
 
-                    var filename = region + (new Date().getTime()) + ".xml";
-                    var fileLink = "/downloads/" + filename;
+                var filename = region + (new Date().getTime()) + ".xml";
+                var fileLink = "/downloads/" + filename;
 
-                    var xmlPath = path.join(__dirname, "../../public" + fileLink);
-                    var zipPath = xmlPath + ".gz";
+                var xmlPath = path.join(__dirname, "../../public" + fileLink);
+                var zipPath = xmlPath + ".gz";
 
-                    fs.writeFileSync(xmlPath, content);
-                    zipFile(xmlPath, zipPath);
-                    log.info("Transformation result file: " + xmlPath);
+                fs.writeFileSync(xmlPath, content);
+                zipFile(xmlPath, zipPath);
+                log.info("Transformation result file: " + xmlPath);
 
-                    response.status(200).send({
-                        link: fileLink + ".gz"                    
-                    });
+                response.status(200).json({
+                    errorAccounts:errorAccounts,
+                    link: fileLink + ".gz"                    
+                });
             });
-
     });
 };

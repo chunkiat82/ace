@@ -40,3 +40,6 @@ public/components
 #public folders to be ignored
 public/downloads
 public/uploads
+
+#mac stuff
+.DS_Store

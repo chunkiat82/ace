@@ -2,6 +2,9 @@
 
 {<body}
     <div class="row bar-row">
+        <div id="progress" class="progress" style="margin-bottom:0px;">
+            <div class="progress-bar progress-bar-success"></div>
+        </div>
         <div class="col-md-3 bar-column">
             <div class="bar-head text-center">Onboard</div>            
             <div class="form-group">
@@ -25,11 +28,13 @@
             <br>
             <br>                        
         </div>
-        <div>
-            <!-- The global progress bar -->
-            <div id="progress" class="progress">
-                <div class="progress-bar progress-bar-success"></div>
+        <div class="col-md-5"> 
+            <div id="users" style="display:none">
+                <input class="search form-control" placeholder="Search" />
+                
+                <ul class="list list-group"></ul>
+              
             </div>
-        </div>
+        </div>  
     </div>    
 {/body}
