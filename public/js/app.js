@@ -69,7 +69,7 @@ require(["angular","jquery","listjs","list.pagination"], function (angular,$,Lis
                                         closeWith: ['click'], 
                                         type: 'error',
                                         layout:'center',
-                                        text:'There are invalid records, please review',
+                                        text:'There are '+result.errorAccounts.length+' invalid records, please review',
                                         modal: true,
                                         callback:{
                                             onCloseClick: function(){
