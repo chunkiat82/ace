@@ -31,9 +31,9 @@
         <div class="col-md-5"> 
             <div id="users" style="display:none">
                 <input class="search form-control" placeholder="Search" />
-                
+                <ul class="pagination"></ul>
                 <ul class="list list-group"></ul>
-              
+                
             </div>
         </div>  
     </div>    

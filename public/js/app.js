@@ -1,6 +1,7 @@
 require.config({
   shim: {
-
+    //https://github.com/javve/list.js/issues/208
+    listjs:  ['listpagination']
   },
   paths: {
     angular: "../components/angular/angular",
@@ -25,7 +26,8 @@ require.config({
     "jquery.iframe-transport": "../components/blueimp-file-upload/js/jquery.iframe-transport",
     noty: "../components/noty/js/noty/packaged/jquery.noty.packaged",
     list: "../components/list.js/dist/list",
-    dynatable: "../components/dynatable/jquery.dynatable"
+    dynatable: "../components/dynatable/jquery.dynatable",
+    "list.pagination": "../components/list.pagination.js/dist/list.pagination"
   },
   packages: [
 
@@ -33,12 +35,15 @@ require.config({
 });
 
 
-require(["angular","jquery","list","noty","jquery.ui.widget","jquery.fileupload","jquery.iframe-transport","dustjs-linkedin","dustjs-linkedin-helpers","bootstrap","bootstrap-filestyle"], function (aa,bb,cc) {
+define('listjs', ["list","list.pagination","noty","jquery.ui.widget","jquery.fileupload","jquery.iframe-transport","dustjs-linkedin","dustjs-linkedin-helpers","bootstrap","bootstrap-filestyle"], function(List) {
+    window.List = List;
+    return List;
+});
+
+require(["angular","jquery","listjs","list.pagination"], function (angular,$,List,ListPagination) {
 
     var app = {
-        initialize: function () {
-
-            var List = cc;
+        initialize: function () {            
 
             //[TODO] - this should ideally move to home page
             $(function () {                    
@@ -76,8 +81,12 @@ require(["angular","jquery","list","noty","jquery.ui.widget","jquery.fileupload"
                                                 $('#users').show();
 
                                                 var options = {
-                                                  valueNames: [ 'hotel', 'errors' ],
-                                                  item:'<li class="list-group-item list-group-item-danger"><h3 class="hotel"></h3><p class="errors"></p></li>'
+                                                    valueNames: [ 'hotel', 'errors' ],
+                                                    item:'<div class="panel panel-danger"><div class="panel-heading hotel"></div><div class="panel-body errors"></div></div>',
+                                                    page: 3,
+                                                    plugins: [
+                                                      ListPagination({})
+                                                    ]
                                                 };
                                                 
                                                 var userList = new List('users', options);
@@ -88,9 +97,23 @@ require(["angular","jquery","list","noty","jquery.ui.widget","jquery.fileupload"
                                                     var errAcc  = result.errorAccounts[i];
                                                     userList.add({
                                                       hotel: result.errorAccounts[i]["HotelName"],
-                                                      errors: JSON.stringify(result.errorAccounts[i]["Errors"])
+                                                      errors: formatErrors(result.errorAccounts[i]["Errors"])
                                                     });                                              
                                                 }
+
+                                                function formatErrors(errors){
+                                                    var templatePre = '<div class="alert alert-warning" role="alert">'+
+                                                      '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>'+
+                                                      '<span class="sr-only">Error:</span>';                                                    
+                                                    var templatePost = '</div>';
+                                                    var template = "";
+                                                    $.each(errors, function(key, value) {
+                                                        $.each(value, function(innerKey, innerValue) {
+                                                            template += templatePre + ' ' + innerKey + ' - <b><font color="red">' + innerValue + '</font></b>' +templatePost;
+                                                        });                       
+                                                    });
+                                                    return template;
+                                                };
 
    
                                             }
