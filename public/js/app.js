@@ -23,8 +23,9 @@ require.config({
     "jquery.fileupload-jquery-ui": "../components/blueimp-file-upload/js/jquery.fileupload-jquery-ui",
     "jquery.fileupload-angular": "../components/blueimp-file-upload/js/jquery.fileupload-angular",
     "jquery.iframe-transport": "../components/blueimp-file-upload/js/jquery.iframe-transport",
-    noty: "../components/noty/js/noty/packaged/jquery.noty.packaged",   
-    list: "../components/list.js/dist/list"
+    noty: "../components/noty/js/noty/packaged/jquery.noty.packaged",
+    list: "../components/list.js/dist/list",
+    dynatable: "../components/dynatable/jquery.dynatable"
   },
   packages: [
 
@@ -62,6 +63,7 @@ require(["angular","jquery","list","noty","jquery.ui.widget","jquery.fileupload"
                                     var n = noty({
                                         closeWith: ['click'], 
                                         type: 'error',
+                                        layout:'center',
                                         text:'There are invalid records, please review',
                                         modal: true,
                                         callback:{
@@ -96,6 +98,8 @@ require(["angular","jquery","list","noty","jquery.ui.widget","jquery.fileupload"
                                     });
                                 }else{
                                     var n = noty({
+                                        layout:'center',
+                                        type:'success',
                                         text:'Click to download <a href="'+result.link+'">Zipped XML<a/>',
                                         modal: true,
                                         callback:{
